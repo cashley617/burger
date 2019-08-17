@@ -8,7 +8,12 @@
         <div class="emptyMid">
             {{#each burger}}
                 {{#unless devoured}}
-                    {{> burgers/burgerBlock devoured=1}}
+                    <li>
+                        {{burger_name}}
+                        <button class="burgerBlock" data-id="{{id}}" data-eaten="{{devoured}}">
+                            {{#if devoured}} Place Another Order {{else}} Eat! {{/if}}
+                        </button>
+                    </li>
                 {{/unless}}
             {{/each}}
         </div>
@@ -16,8 +21,10 @@
 
     <div class="midCenter">
         <div class="center">
-            <input id="burgerName" type="text" placeholder="Enter name of burger" data-eaten="0">
-            <button id="addBurger" type="button">Add Your Burger</button>
+            <form action="/api/burger" method="POST">
+                <input id="burgerName" type="text" placeholder="Enter name of burger" data-eaten="0" name="burger_name">
+                <button id="addBurger" type="submit">Add Your Burger</button>
+            </form>
         </div>
     </div>
 
@@ -25,7 +32,12 @@
         <div class="eatenMid">
             {{#each burger}}
                 {{#if devoured}}
-                    {{> burgers/burgerBlock devoured=0}}
+                    <li>
+                        {{burger_name}}
+                        <button class="burgerBlock" data-id="{{id}}" data-eaten="{{devoured}}">
+                            {{#if devoured}} Place Another Order {{else}} Eat! {{/if}}
+                        </button>
+                    </li>
                 {{/if}}
             {{/each}}
         </div>
