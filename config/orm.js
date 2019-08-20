@@ -33,25 +33,37 @@ const orm = {
     }, 
 
     // insertOne Method
-    insertOne: function(tableName, cols, vals, cb) {
-        var queryString = "INSERT INTO " + table;
+    // insertOne: function (tableName, cols, vals, cb) {
+    //     var queryString = "INSERT INTO " + table;
 
-        queryString += " (";
-        queryString += cols.toString();
-        queryString += ") ";
-        queryString += "VALUES (";
-        queryString += printQuestionMarks(vals.length);
-        queryString += ") ";
+    //     queryString += " (";
+    //     queryString += cols.toString();
+    //     queryString += ") ";
+    //     queryString += "VALUES (";
+    //     queryString += printQuestionMarks(vals.length);
+    //     queryString += ") ";
 
-        console.log(queryString);
+    //     console.log(queryString);
 
-        connection.query(queryString, vals, function(err, result) {
-            if (err) {
-                throw err;
-            }
-            console.log("Added One!");
-            cb(result);
+    //     connection.query(queryString, vals, function(err, result) {
+    //         if (err) {
+    //             throw err;
+    //         }
+    //         console.log("Added One!");
+    //         cb(result);
+    //     });
+    // },
+
+    insertOne: (tableName, cols, vals, callback) => {
+
+        let queryStatement = `INSERT INTO  ${tableName} (${cols.toString()}) VALUES (${printQuestionMarks(vals.length)});`;
+
+        connection.query(queryStatement, vals, (err, result) => {
+            if (err) throw err;
+            console.log("Sucesfully Added");
+            callback(result);
         });
+
     },
 
     // updateOne Method
