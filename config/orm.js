@@ -70,11 +70,8 @@ const orm = {
     updateOne: function(tableName, cols, vals, condition, cb) {
         var queryString = `UPDATE ${tableName} SET ${cols.toString()} = ? WHERE ${condition}`;
 
-        console.log(queryString);
-
         connection.query(queryString, vals, (err, result) => {
             if (err) throw err;
-            console.log("Updated One!");
             cb(result);
         });
 
